@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Framea</title>
+  <meta name="description" content="Framea is a simple Mac app for capturing still frames from videos." />
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f5f5f7;
+      --card: #ffffff;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --line: #d2d2d7;
+      --accent: #0071e3;
+      --badge-bg: #e8f1fb;
+      --badge-text: #0057a8;
+      --header-start: #ffffff;
+      --header-end: #f5f5f7;
+      --hero-bg: #111111;
+      --hero-text: #aaaaaa;
+      --shadow-card: 0 10px 30px rgba(0,0,0,0.06);
+      --shadow-hero: 0 30px 80px rgba(0,0,0,0.18);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f0f10;
+        --card: #1c1c1e;
+        --text: #f5f5f7;
+        --muted: #a1a1a6;
+        --line: #3a3a3c;
+        --accent: #2997ff;
+        --badge-bg: rgba(41, 151, 255, 0.16);
+        --badge-text: #8ecbff;
+        --header-start: #171719;
+        --header-end: #0f0f10;
+        --hero-bg: #050505;
+        --hero-text: #8e8e93;
+        --shadow-card: 0 10px 30px rgba(0,0,0,0.28);
+        --shadow-hero: 0 30px 80px rgba(0,0,0,0.45);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    header {
+      padding: 88px 24px 72px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--header-start) 0%, var(--header-end) 100%);
+    }
+
+    .app-icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 22px;
+      display: block;
+      margin: 0 auto 22px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+    }
+
+    .app-name {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin: 0 auto 24px;
+      max-width: 900px;
+    }
+
+    .lead {
+      font-size: clamp(20px, 2.5vw, 28px);
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 auto 36px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    .hero-image {
+      margin: 24px auto 72px;
+      border-radius: 28px;
+      background: var(--hero-bg);
+      min-height: 420px;
+      box-shadow: var(--shadow-hero);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--hero-text);
+      text-align: center;
+      padding: 32px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .section-title {
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin: 0 0 18px;
+      text-align: center;
+    }
+
+    .section-lead {
+      color: var(--muted);
+      font-size: 20px;
+      max-width: 720px;
+      text-align: center;
+      margin: 0 auto 40px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin: 40px 0 80px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow-card);
+      min-height: 220px;
+      border: 1px solid rgba(128,128,128,0.12);
+    }
+
+    .card h3 {
+      font-size: 24px;
+      line-height: 1.2;
+      margin: 0 0 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .faq {
+      background: var(--card);
+      border-radius: 28px;
+      padding: 36px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 48px;
+      border: 1px solid rgba(128,128,128,0.12);
+    }
+
+    .faq-item {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .faq p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 48px 24px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 1000px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 800px) {
+      header {
+        padding-top: 64px;
+      }
+
+      .app-icon {
+        width: 82px;
+        height: 82px;
+        border-radius: 20px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        min-height: 260px;
+        border-radius: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img class="app-icon" src="assets/icon.png" alt="Framea app icon" />
+    <div class="app-name">Framea</div>
+    <h1>Capture the perfect frame from your videos.</h1>
+    <p class="lead">
+      Framea is a simple Mac app for saving still images from video files.
+      Capture one frame instantly, or batch export frames at custom intervals.
+    </p>
+    <div class="badge">Coming soon on the Mac App Store</div>
+  </header>
+
+  <main>
+    <div class="hero-image">
+      <div>
+        <strong>Screenshot placeholder</strong><br />
+        Replace this area with a Framea app screenshot later.
+      </div>
+    </div>
+
+    <section>
+      <h2 class="section-title">Simple, fast, and focused.</h2>
+      <p class="section-lead">
+        Framea is designed for creators, editors, photographers, and anyone who wants to save beautiful moments from video.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Instant frame capture</h3>
+          <p>
+            Open a video, choose the perfect moment, and save a high-quality still image with a single action.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Metadata options</h3>
+          <p>
+            Choose whether to preserve shooting date and location metadata when saving images.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Batch export</h3>
+          <p>
+            Save frames automatically at custom intervals, such as every second, for faster review and selection.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Multi-video workflow</h3>
+          <p>
+            Add multiple videos, switch between them from the sidebar, and batch export frames from the list.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq">
+      <h2 class="section-title">FAQ</h2>
+
+      <div class="faq-item">
+        <h3>What is Framea?</h3>
+        <p>
+          Framea is a macOS app that helps you capture still images from video files quickly and easily.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Which video formats are supported?</h3>
+        <p>
+          Framea supports major video formats that are supported by macOS AVFoundation, including MP4, MOV, and M4V.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Does Framea support metadata?</h3>
+        <p>
+          Framea includes options for saving shooting date and location metadata when available.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Can Framea batch export frames?</h3>
+        <p>
+          Yes. You can export frames at custom time intervals, such as every 1 second or every 5 seconds.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What are the system requirements?</h3>
+        <p>
+          Framea is designed for macOS and works on Apple Silicon and Intel Macs, depending on the version distributed on the Mac App Store.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How can I contact support?</h3>
+        <p>
+          Please contact:
+          <a href="mailto:hello.toshiyuki.kanai@gmail.com">hello.toshiyuki.kanai@gmail.com</a>
+        </p>
+      </div>
+    </section>
+
+    <section style="text-align:center;">
+      <h2 class="section-title">Support</h2>
+      <p class="section-lead">
+        For questions, feedback, or support requests, please contact
+        <a href="mailto:hello.toshiyuki.kanai@gmail.com">hello.toshiyuki.kanai@gmail.com</a>.
+      </p>
+      <p>
+        <a href="privacy.html">Privacy Policy</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Toshiyuki Kanai. Framea.
+  </footer>
+</body>
+</html>
