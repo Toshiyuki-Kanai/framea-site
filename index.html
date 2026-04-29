@@ -116,17 +116,19 @@
 
     .hero-image {
       margin: 24px auto 72px;
-      border-radius: 28px;
-      background: var(--hero-bg);
-      min-height: 420px;
-      box-shadow: var(--shadow-hero);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--hero-text);
-      text-align: center;
-      padding: 32px;
-      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 0px;
+      overflow: hidden;
+      padding: 0;
+      box-shadow: none;
+      border: none;
+      min-height: auto;
+      background: transparent;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     .section-title {
@@ -251,12 +253,10 @@
   </header>
 
   <main>
-    <div class="hero-image">
-      <div>
-        <strong>Screenshot placeholder</strong><br />
-        Replace this area with a Framea app screenshot later.
-      </div>
-    </div>
+<div class="hero-image">
+  <img src="assets/framea-screenshot-1.png" alt="Framea Screenshot" />
+</div>
+
 
     <section>
       <h2 class="section-title">Simple, fast, and focused.</h2>
