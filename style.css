@@ -1,0 +1,24 @@
+.badge-dark {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .badge-light {
+        display: none;
+    }
+
+    .badge-dark {
+        display: inline;
+    }
+}
+
+.app-store-badge {
+    height: 56px;
+    width: auto;
+    transition: opacity 0.2s ease;
+}
+
+.app-store-badge:hover {
+    opacity: 0.85;
+}
